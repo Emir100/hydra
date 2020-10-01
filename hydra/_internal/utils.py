@@ -673,7 +673,8 @@ def _get_kwargs(
                         d[key] = value
                 d._metadata.object_type = v._metadata.object_type
                 final_kwargs[k] = d
-            elif OmegaConf.is_list(v):
+            elif OmegaConf.is_list(v) and not OmegaConf.is_none(v):
+                # TODO: add test for is_none list case.
                 lst = OmegaConf.create([], flags={"allow_objects": True})
                 for x in v:
                     if _is_target(x):
